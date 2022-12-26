@@ -3,6 +3,7 @@ import {Alert, StyleSheet, View} from 'react-native';
 import {Navbar} from './src/components/Navbar';
 import {MainScreen} from './src/screens/MainScreen';
 import {TodoScreen} from './src/screens/TodoScreen';
+import LinearGradient from 'react-native-linear-gradient';
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -61,34 +62,42 @@ const App = () => {
   };
 
   return (
-    <View>
-      <Navbar title={'Todo App'} />
-      <View style={styles.default}>
-        {selectedTodo ? (
-          <TodoScreen
-            goBack={goBack}
-            todo={selectedTodo}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-          />
-        ) : (
-          <MainScreen
-            todos={todos}
-            addTodo={addTodo}
-            deleteTodo={deleteTodo}
-            openDetailView={openDetailView}
-          />
-        )}
-      </View>
+    <View style={styles.container}>
+      <LinearGradient style={styles.gradient} colors={['yellow', 'blue']}>
+        <Navbar title={'Todo App'} />
+        <View style={styles.default}>
+          {selectedTodo ? (
+            <TodoScreen
+              goBack={goBack}
+              todo={selectedTodo}
+              deleteTodo={deleteTodo}
+              editTodo={editTodo}
+            />
+          ) : (
+            <MainScreen
+              todos={todos}
+              addTodo={addTodo}
+              deleteTodo={deleteTodo}
+              openDetailView={openDetailView}
+            />
+          )}
+        </View>
+      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   default: {
-    backgroundColor: 'white',
     paddingHorizontal: 30,
     paddingVertical: 20,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  gradient: {
+    height: '100%',
   },
 });
 
